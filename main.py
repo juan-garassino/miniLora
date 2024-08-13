@@ -86,18 +86,14 @@ def main(args):
     lora_variants = [
         ("StandardLoRA", StandardLoRALinear),
         ("ScaledLoRA", ScaledLoRALinear),
-        ("MultiRankLoRA", lambda in_f, out_f: MultiRankLoRALinear(in_f, out_f, r=[4, 8]))
+        ("MultiRankLoRA", MultiRankLoRALinear)
     ]
 
     lora_models = {}
     for lora_name, LoRAClass in lora_variants:
         logger.info(f"Fine-tuning with {lora_name} on Fashion MNIST...")
         
-        if lora_name == "MultiRankLoRA":
-            lora_model = create_lora_cnn(LoRAClass)
-        else:
-            lora_model = create_lora_cnn(LoRAClass, r=4, lora_alpha=1, lora_dropout=0.)
-        
+        lora_model = create_lora_cnn(LoRAClass)
         lora_model = lora_model.to(DEVICE)
         lora_model.load_state_dict(base_cnn.state_dict(), strict=False)
         
