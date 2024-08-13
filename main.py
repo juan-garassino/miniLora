@@ -92,7 +92,13 @@ def main(args):
     lora_models = {}
     for lora_name, LoRAClass in lora_variants:
         logger.info(f"Fine-tuning with {lora_name} on Fashion MNIST...")
-        lora_model = create_lora_cnn(LoRAClass).to(DEVICE)
+        
+        if lora_name == "MultiRankLoRA":
+            lora_model = create_lora_cnn(LoRAClass)
+        else:
+            lora_model = create_lora_cnn(LoRAClass, r=4, lora_alpha=1, lora_dropout=0.)
+        
+        lora_model = lora_model.to(DEVICE)
         lora_model.load_state_dict(base_cnn.state_dict(), strict=False)
         
         optimizer = optim.Adam(lora_model.parameters(), lr=learning_rate)
@@ -100,7 +106,7 @@ def main(args):
         lora_train_losses, lora_test_losses, lora_test_accuracies = [], [], []
         for epoch in range(args.fashion_mnist_epochs):
             train_loss = fine_tune(lora_model, DEVICE, fashion_train_loader, optimizer, epoch)
-            _, test_loss, test_accuracy = train_and_evaluate(lora_model, DEVICE, fashion_train_loader, fashion_test_loader, optimizer, 1)
+            test_loss, test_accuracy = train_and_evaluate(lora_model, DEVICE, fashion_train_loader, fashion_test_loader, optimizer, 1)
             lora_train_losses.append(train_loss)
             lora_test_losses.append(test_loss[0])
             lora_test_accuracies.append(test_accuracy[0])
