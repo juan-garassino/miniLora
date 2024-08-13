@@ -1,0 +1,141 @@
+2024-08-13 18:17:26,411 - miniLora - INFO - Using device: cpu
+2024-08-13 18:17:26,411 - miniLora - INFO - Output directory: output_20240813_181726
+2024-08-13 18:17:34,337 - miniLora - INFO - MNIST dataset loaded. Training set size: 60000, Test set size: 10000
+2024-08-13 18:17:38,116 - miniLora - INFO - Fashion MNIST dataset loaded. Training set size: 60000, Test set size: 10000
+2024-08-13 18:17:38,117 - miniLora - INFO - Starting hyperparameter tuning...
+2024-08-13 18:17:38,117 - miniLora - INFO - Trying parameters: {'lr': 0.001, 'batch_size': 32}
+2024-08-13 18:17:38,507 - miniLora - INFO - Train Epoch: 0 [0/60000 (0%)]	Loss: 2.302480
+2024-08-13 18:17:48,265 - miniLora - INFO - Train Epoch: 0 [6400/60000 (11%)]	Loss: 0.510277
+2024-08-13 18:17:57,052 - miniLora - INFO - Train Epoch: 0 [12800/60000 (21%)]	Loss: 0.235903
+2024-08-13 18:18:06,085 - miniLora - INFO - Train Epoch: 0 [19200/60000 (32%)]	Loss: 0.152774
+2024-08-13 18:18:15,981 - miniLora - INFO - Train Epoch: 0 [25600/60000 (43%)]	Loss: 0.268617
+2024-08-13 18:18:26,948 - miniLora - INFO - Train Epoch: 0 [32000/60000 (53%)]	Loss: 0.167006
+2024-08-13 18:18:37,222 - miniLora - INFO - Train Epoch: 0 [38400/60000 (64%)]	Loss: 0.055609
+2024-08-13 18:18:48,214 - miniLora - INFO - Train Epoch: 0 [44800/60000 (75%)]	Loss: 0.066354
+2024-08-13 18:18:58,502 - miniLora - INFO - Train Epoch: 0 [51200/60000 (85%)]	Loss: 0.060846
+2024-08-13 18:19:08,534 - miniLora - INFO - Train Epoch: 0 [57600/60000 (96%)]	Loss: 0.122645
+2024-08-13 18:19:12,231 - miniLora - INFO - Train Epoch: 0, Average loss: 0.2070
+2024-08-13 18:19:12,318 - miniLora - INFO - Train Epoch: 1 [0/60000 (0%)]	Loss: 0.086792
+2024-08-13 18:19:23,112 - miniLora - INFO - Train Epoch: 1 [6400/60000 (11%)]	Loss: 0.061319
+2024-08-13 18:19:33,076 - miniLora - INFO - Train Epoch: 1 [12800/60000 (21%)]	Loss: 0.035966
+2024-08-13 18:19:41,914 - miniLora - INFO - Train Epoch: 1 [19200/60000 (32%)]	Loss: 0.044077
+2024-08-13 18:19:53,587 - miniLora - INFO - Train Epoch: 1 [25600/60000 (43%)]	Loss: 0.109157
+2024-08-13 18:20:03,256 - miniLora - INFO - Train Epoch: 1 [32000/60000 (53%)]	Loss: 0.240143
+2024-08-13 18:20:14,968 - miniLora - INFO - Train Epoch: 1 [38400/60000 (64%)]	Loss: 0.103266
+2024-08-13 18:20:25,717 - miniLora - INFO - Train Epoch: 1 [44800/60000 (75%)]	Loss: 0.023142
+2024-08-13 18:20:36,826 - miniLora - INFO - Train Epoch: 1 [51200/60000 (85%)]	Loss: 0.013674
+2024-08-13 18:20:46,880 - miniLora - INFO - Train Epoch: 1 [57600/60000 (96%)]	Loss: 0.016536
+2024-08-13 18:20:50,729 - miniLora - INFO - Train Epoch: 1, Average loss: 0.0841
+2024-08-13 18:20:50,819 - miniLora - INFO - Train Epoch: 2 [0/60000 (0%)]	Loss: 0.076934
+2024-08-13 18:21:01,539 - miniLora - INFO - Train Epoch: 2 [6400/60000 (11%)]	Loss: 0.050277
+2024-08-13 18:21:12,439 - miniLora - INFO - Train Epoch: 2 [12800/60000 (21%)]	Loss: 0.083513
+2024-08-13 18:21:25,000 - miniLora - INFO - Train Epoch: 2 [19200/60000 (32%)]	Loss: 0.048670
+2024-08-13 18:21:35,367 - miniLora - INFO - Train Epoch: 2 [25600/60000 (43%)]	Loss: 0.113641
+2024-08-13 18:21:45,143 - miniLora - INFO - Train Epoch: 2 [32000/60000 (53%)]	Loss: 0.018777
+2024-08-13 18:21:54,631 - miniLora - INFO - Train Epoch: 2 [38400/60000 (64%)]	Loss: 0.182727
+2024-08-13 18:22:04,191 - miniLora - INFO - Train Epoch: 2 [44800/60000 (75%)]	Loss: 0.055831
+2024-08-13 18:22:14,847 - miniLora - INFO - Train Epoch: 2 [51200/60000 (85%)]	Loss: 0.018106
+2024-08-13 18:22:27,752 - miniLora - INFO - Train Epoch: 2 [57600/60000 (96%)]	Loss: 0.026645
+2024-08-13 18:22:31,149 - miniLora - INFO - Train Epoch: 2, Average loss: 0.0629
+2024-08-13 18:22:38,225 - miniLora - INFO - Test set: Average loss: 0.0340, Accuracy: 9894/10000 (98.94%)
+2024-08-13 18:22:38,225 - miniLora - INFO - Trying parameters: {'lr': 0.001, 'batch_size': 64}
+2024-08-13 18:22:38,323 - miniLora - INFO - Train Epoch: 0 [0/60000 (0%)]	Loss: 2.304419
+2024-08-13 18:22:50,709 - miniLora - INFO - Train Epoch: 0 [6400/60000 (11%)]	Loss: 0.226392
+2024-08-13 18:23:00,091 - miniLora - INFO - Train Epoch: 0 [12800/60000 (21%)]	Loss: 0.250574
+2024-08-13 18:23:09,714 - miniLora - INFO - Train Epoch: 0 [19200/60000 (32%)]	Loss: 0.238744
+2024-08-13 18:23:30,981 - miniLora - INFO - Train Epoch: 0 [25600/60000 (43%)]	Loss: 0.122557
+2024-08-13 18:23:50,537 - miniLora - INFO - Train Epoch: 0 [32000/60000 (53%)]	Loss: 0.267766
+2024-08-13 18:24:20,040 - miniLora - INFO - Train Epoch: 0 [38400/60000 (64%)]	Loss: 0.324801
+2024-08-13 18:24:47,531 - miniLora - INFO - Train Epoch: 0 [44800/60000 (75%)]	Loss: 0.550130
+2024-08-13 18:25:04,169 - miniLora - INFO - Train Epoch: 0 [51200/60000 (85%)]	Loss: 0.162436
+2024-08-13 18:25:14,414 - miniLora - INFO - Train Epoch: 0 [57600/60000 (96%)]	Loss: 0.188379
+2024-08-13 18:25:26,013 - miniLora - INFO - Train Epoch: 0, Average loss: 0.2243
+2024-08-13 18:25:26,361 - miniLora - INFO - Train Epoch: 1 [0/60000 (0%)]	Loss: 0.127412
+2024-08-13 18:25:58,210 - miniLora - INFO - Train Epoch: 1 [6400/60000 (11%)]	Loss: 0.139454
+2024-08-13 18:26:17,223 - miniLora - INFO - Train Epoch: 1 [12800/60000 (21%)]	Loss: 0.084370
+2024-08-13 18:26:26,784 - miniLora - INFO - Train Epoch: 1 [19200/60000 (32%)]	Loss: 0.130685
+2024-08-13 18:26:41,299 - miniLora - INFO - Train Epoch: 1 [25600/60000 (43%)]	Loss: 0.159488
+2024-08-13 18:26:51,001 - miniLora - INFO - Train Epoch: 1 [32000/60000 (53%)]	Loss: 0.136409
+2024-08-13 18:27:00,066 - miniLora - INFO - Train Epoch: 1 [38400/60000 (64%)]	Loss: 0.096545
+2024-08-13 18:27:10,866 - miniLora - INFO - Train Epoch: 1 [44800/60000 (75%)]	Loss: 0.172658
+2024-08-13 18:27:23,577 - miniLora - INFO - Train Epoch: 1 [51200/60000 (85%)]	Loss: 0.018769
+2024-08-13 18:27:32,583 - miniLora - INFO - Train Epoch: 1 [57600/60000 (96%)]	Loss: 0.029128
+2024-08-13 18:27:36,546 - miniLora - INFO - Train Epoch: 1, Average loss: 0.0999
+2024-08-13 18:27:36,633 - miniLora - INFO - Train Epoch: 2 [0/60000 (0%)]	Loss: 0.197218
+2024-08-13 18:27:46,358 - miniLora - INFO - Train Epoch: 2 [6400/60000 (11%)]	Loss: 0.048846
+2024-08-13 18:27:54,892 - miniLora - INFO - Train Epoch: 2 [12800/60000 (21%)]	Loss: 0.020388
+2024-08-13 18:28:03,100 - miniLora - INFO - Train Epoch: 2 [19200/60000 (32%)]	Loss: 0.053946
+2024-08-13 18:28:11,276 - miniLora - INFO - Train Epoch: 2 [25600/60000 (43%)]	Loss: 0.202222
+2024-08-13 18:28:19,982 - miniLora - INFO - Train Epoch: 2 [32000/60000 (53%)]	Loss: 0.063860
+2024-08-13 18:28:28,238 - miniLora - INFO - Train Epoch: 2 [38400/60000 (64%)]	Loss: 0.106000
+2024-08-13 18:28:36,592 - miniLora - INFO - Train Epoch: 2 [44800/60000 (75%)]	Loss: 0.031018
+2024-08-13 18:28:47,771 - miniLora - INFO - Train Epoch: 2 [51200/60000 (85%)]	Loss: 0.007682
+2024-08-13 18:28:58,156 - miniLora - INFO - Train Epoch: 2 [57600/60000 (96%)]	Loss: 0.011319
+2024-08-13 18:29:02,228 - miniLora - INFO - Train Epoch: 2, Average loss: 0.0742
+2024-08-13 18:29:09,124 - miniLora - INFO - Test set: Average loss: 0.0326, Accuracy: 9889/10000 (98.89%)
+2024-08-13 18:29:09,125 - miniLora - INFO - Trying parameters: {'lr': 0.001, 'batch_size': 128}
+2024-08-13 18:29:09,221 - miniLora - INFO - Train Epoch: 0 [0/60000 (0%)]	Loss: 2.316900
+2024-08-13 18:29:18,721 - miniLora - INFO - Train Epoch: 0 [6400/60000 (11%)]	Loss: 0.236965
+2024-08-13 18:29:27,755 - miniLora - INFO - Train Epoch: 0 [12800/60000 (21%)]	Loss: 0.104321
+2024-08-13 18:29:36,548 - miniLora - INFO - Train Epoch: 0 [19200/60000 (32%)]	Loss: 0.195818
+2024-08-13 18:29:46,008 - miniLora - INFO - Train Epoch: 0 [25600/60000 (43%)]	Loss: 0.183059
+2024-08-13 18:29:55,246 - miniLora - INFO - Train Epoch: 0 [32000/60000 (53%)]	Loss: 0.063824
+2024-08-13 18:30:06,217 - miniLora - INFO - Train Epoch: 0 [38400/60000 (64%)]	Loss: 0.268663
+2024-08-13 18:30:16,579 - miniLora - INFO - Train Epoch: 0 [44800/60000 (75%)]	Loss: 0.106028
+2024-08-13 18:30:25,850 - miniLora - INFO - Train Epoch: 0 [51200/60000 (85%)]	Loss: 0.115274
+2024-08-13 18:30:36,491 - miniLora - INFO - Train Epoch: 0 [57600/60000 (96%)]	Loss: 0.069607
+2024-08-13 18:30:41,737 - miniLora - INFO - Train Epoch: 0, Average loss: 0.2028
+2024-08-13 18:30:41,834 - miniLora - INFO - Train Epoch: 1 [0/60000 (0%)]	Loss: 0.070880
+2024-08-13 18:30:52,873 - miniLora - INFO - Train Epoch: 1 [6400/60000 (11%)]	Loss: 0.053420
+2024-08-13 18:31:06,286 - miniLora - INFO - Train Epoch: 1 [12800/60000 (21%)]	Loss: 0.209483
+2024-08-13 18:31:17,773 - miniLora - INFO - Train Epoch: 1 [19200/60000 (32%)]	Loss: 0.114680
+2024-08-13 18:31:28,616 - miniLora - INFO - Train Epoch: 1 [25600/60000 (43%)]	Loss: 0.056090
+2024-08-13 18:31:38,945 - miniLora - INFO - Train Epoch: 1 [32000/60000 (53%)]	Loss: 0.176326
+2024-08-13 18:31:49,515 - miniLora - INFO - Train Epoch: 1 [38400/60000 (64%)]	Loss: 0.145253
+2024-08-13 18:31:58,636 - miniLora - INFO - Train Epoch: 1 [44800/60000 (75%)]	Loss: 0.028172
+2024-08-13 18:32:07,338 - miniLora - INFO - Train Epoch: 1 [51200/60000 (85%)]	Loss: 0.087285
+2024-08-13 18:32:16,616 - miniLora - INFO - Train Epoch: 1 [57600/60000 (96%)]	Loss: 0.186042
+2024-08-13 18:32:19,770 - miniLora - INFO - Train Epoch: 1, Average loss: 0.0883
+2024-08-13 18:32:19,858 - miniLora - INFO - Train Epoch: 2 [0/60000 (0%)]	Loss: 0.036067
+2024-08-13 18:32:28,526 - miniLora - INFO - Train Epoch: 2 [6400/60000 (11%)]	Loss: 0.028332
+2024-08-13 18:32:41,113 - miniLora - INFO - Train Epoch: 2 [12800/60000 (21%)]	Loss: 0.055177
+2024-08-13 18:32:53,382 - miniLora - INFO - Train Epoch: 2 [19200/60000 (32%)]	Loss: 0.060374
+2024-08-13 18:33:04,729 - miniLora - INFO - Train Epoch: 2 [25600/60000 (43%)]	Loss: 0.098078
+2024-08-13 18:33:18,754 - miniLora - INFO - Train Epoch: 2 [32000/60000 (53%)]	Loss: 0.100968
+2024-08-13 18:33:30,195 - miniLora - INFO - Train Epoch: 2 [38400/60000 (64%)]	Loss: 0.182364
+2024-08-13 18:33:40,515 - miniLora - INFO - Train Epoch: 2 [44800/60000 (75%)]	Loss: 0.032530
+2024-08-13 18:33:52,060 - miniLora - INFO - Train Epoch: 2 [51200/60000 (85%)]	Loss: 0.071135
+2024-08-13 18:34:02,268 - miniLora - INFO - Train Epoch: 2 [57600/60000 (96%)]	Loss: 0.087683
+2024-08-13 18:34:05,776 - miniLora - INFO - Train Epoch: 2, Average loss: 0.0711
+2024-08-13 18:34:16,853 - miniLora - INFO - Test set: Average loss: 0.0415, Accuracy: 9858/10000 (98.58%)
+2024-08-13 18:34:16,854 - miniLora - INFO - Trying parameters: {'lr': 0.01, 'batch_size': 32}
+2024-08-13 18:34:17,007 - miniLora - INFO - Train Epoch: 0 [0/60000 (0%)]	Loss: 2.290957
+2024-08-13 18:34:28,085 - miniLora - INFO - Train Epoch: 0 [6400/60000 (11%)]	Loss: 2.309928
+2024-08-13 18:34:38,721 - miniLora - INFO - Train Epoch: 0 [12800/60000 (21%)]	Loss: 2.304905
+2024-08-13 18:34:50,069 - miniLora - INFO - Train Epoch: 0 [19200/60000 (32%)]	Loss: 2.314650
+2024-08-13 18:35:02,851 - miniLora - INFO - Train Epoch: 0 [25600/60000 (43%)]	Loss: 2.301306
+2024-08-13 18:35:24,557 - miniLora - INFO - Train Epoch: 0 [32000/60000 (53%)]	Loss: 2.301444
+2024-08-13 18:35:34,694 - miniLora - INFO - Train Epoch: 0 [38400/60000 (64%)]	Loss: 2.299602
+2024-08-13 18:35:46,542 - miniLora - INFO - Train Epoch: 0 [44800/60000 (75%)]	Loss: 2.289731
+2024-08-13 18:35:58,153 - miniLora - INFO - Train Epoch: 0 [51200/60000 (85%)]	Loss: 2.302837
+2024-08-13 18:36:08,550 - miniLora - INFO - Train Epoch: 0 [57600/60000 (96%)]	Loss: 2.312029
+2024-08-13 18:36:13,881 - miniLora - INFO - Train Epoch: 0, Average loss: 2.3204
+2024-08-13 18:36:14,013 - miniLora - INFO - Train Epoch: 1 [0/60000 (0%)]	Loss: 2.298882
+2024-08-13 18:36:24,038 - miniLora - INFO - Train Epoch: 1 [6400/60000 (11%)]	Loss: 2.304333
+2024-08-13 18:36:33,644 - miniLora - INFO - Train Epoch: 1 [12800/60000 (21%)]	Loss: 2.313778
+2024-08-13 18:36:44,303 - miniLora - INFO - Train Epoch: 1 [19200/60000 (32%)]	Loss: 2.291008
+2024-08-13 18:37:16,269 - miniLora - INFO - Train Epoch: 1 [25600/60000 (43%)]	Loss: 2.290736
+2024-08-13 18:37:31,890 - miniLora - INFO - Train Epoch: 1 [32000/60000 (53%)]	Loss: 2.318996
+2024-08-13 18:37:42,092 - miniLora - INFO - Train Epoch: 1 [38400/60000 (64%)]	Loss: 2.302037
+2024-08-13 18:38:03,090 - miniLora - INFO - Train Epoch: 1 [44800/60000 (75%)]	Loss: 2.286560
+2024-08-13 18:38:20,702 - miniLora - INFO - Train Epoch: 1 [51200/60000 (85%)]	Loss: 2.286635
+2024-08-13 18:38:31,416 - miniLora - INFO - Train Epoch: 1 [57600/60000 (96%)]	Loss: 2.313703
+2024-08-13 18:38:35,091 - miniLora - INFO - Train Epoch: 1, Average loss: 2.3021
+2024-08-13 18:38:35,180 - miniLora - INFO - Train Epoch: 2 [0/60000 (0%)]	Loss: 2.307411
+2024-08-13 18:38:44,268 - miniLora - INFO - Train Epoch: 2 [6400/60000 (11%)]	Loss: 2.282232
+2024-08-13 18:38:54,167 - miniLora - INFO - Train Epoch: 2 [12800/60000 (21%)]	Loss: 2.294216
+2024-08-13 18:39:06,344 - miniLora - INFO - Train Epoch: 2 [19200/60000 (32%)]	Loss: 2.297035
+2024-08-13 18:39:16,824 - miniLora - INFO - Train Epoch: 2 [25600/60000 (43%)]	Loss: 2.309436
+2024-08-13 18:39:53,445 - miniLora - INFO - Train Epoch: 2 [32000/60000 (53%)]	Loss: 2.307969
+2024-08-13 18:40:23,389 - miniLora - INFO - Train Epoch: 2 [38400/60000 (64%)]	Loss: 2.315477
+2024-08-13 18:40:48,651 - miniLora - INFO - Train Epoch: 2 [44800/60000 (75%)]	Loss: 2.302093
