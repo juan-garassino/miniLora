@@ -100,7 +100,7 @@ def main(args):
         lora_train_losses, lora_test_losses, lora_test_accuracies = [], [], []
         for epoch in range(args.fashion_mnist_epochs):
             train_loss = fine_tune(lora_model, DEVICE, fashion_train_loader, optimizer, epoch)
-            _, test_loss, test_accuracy = train_and_evaluate(lora_model, DEVICE, fashion_train_loader, fashion_test_loader, optimizer, 1)
+            test_loss, test_accuracy = train_and_evaluate(lora_model, DEVICE, fashion_train_loader, fashion_test_loader, optimizer, 1)
             lora_train_losses.append(train_loss)
             lora_test_losses.append(test_loss[0])
             lora_test_accuracies.append(test_accuracy[0])

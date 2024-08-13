@@ -82,6 +82,10 @@ class MultiRankLoRALinear(nn.Module):
 
 def create_lora_cnn(lora_class, r=4, lora_alpha=1, lora_dropout=0.):
     model = CNN()
-    model.fc1 = lora_class(9216, 128, r=r, lora_alpha=lora_alpha, lora_dropout=lora_dropout)
-    model.fc2 = lora_class(128, 10, r=r, lora_alpha=lora_alpha, lora_dropout=lora_dropout)
+    if lora_class.__name__ == 'function':  # This is the MultiRankLoRALinear lambda
+        model.fc1 = lora_class(9216, 128)
+        model.fc2 = lora_class(128, 10)
+    else:
+        model.fc1 = lora_class(9216, 128, r=r, lora_alpha=lora_alpha, lora_dropout=lora_dropout)
+        model.fc2 = lora_class(128, 10, r=r, lora_alpha=lora_alpha, lora_dropout=lora_dropout)
     return model
