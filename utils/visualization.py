@@ -8,6 +8,8 @@ from sklearn.manifold import TSNE
 from sklearn.metrics import confusion_matrix
 import cv2
 from utils.logger import logger
+import torch.nn as nn
+
 
 def plot_learning_curves(train_losses, test_losses, test_accuracies, title, output_dir):
     """
@@ -61,13 +63,19 @@ def plot_weight_heatmaps(model, title, output_dir):
     plt.title('Conv2 Weights')
 
     # Plot fc1 weights
-    fc1_weights = model.fc1.weight.detach().cpu().numpy()
+    if isinstance(model.fc1, nn.Linear):
+        fc1_weights = model.fc1.weight.detach().cpu().numpy()
+    else:  # LoRA layer
+        fc1_weights = model.fc1.linear.weight.detach().cpu().numpy()
     plt.subplot(2, 2, 3)
     sns.heatmap(fc1_weights, cmap='viridis')
     plt.title('FC1 Weights')
 
     # Plot fc2 weights
-    fc2_weights = model.fc2.weight.detach().cpu().numpy()
+    if isinstance(model.fc2, nn.Linear):
+        fc2_weights = model.fc2.weight.detach().cpu().numpy()
+    else:  # LoRA layer
+        fc2_weights = model.fc2.linear.weight.detach().cpu().numpy()
     plt.subplot(2, 2, 4)
     sns.heatmap(fc2_weights, cmap='viridis')
     plt.title('FC2 Weights')
