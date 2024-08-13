@@ -131,7 +131,17 @@ def visualize_feature_space(model, device, data_loader, title, output_dir):
     with torch.no_grad():
         for data, target in data_loader:
             data = data.to(device)
-            feature = model.fc1(model.dropout1(torch.flatten(model.conv2(model.conv1(data)), 1)))
+            # Forward pass through convolutional layers
+            x = model.conv1(data)
+            x = torch.nn.functional.relu(x)
+            x = model.conv2(x)
+            x = torch.nn.functional.relu(x)
+            x = torch.nn.functional.max_pool2d(x, 2)
+            x = model.dropout1(x)
+            # Flatten the output
+            x = torch.flatten(x, 1)
+            # Forward pass through fc1
+            feature = model.fc1(x)
             features.append(feature.cpu().numpy())
             labels.extend(target.numpy())
 
