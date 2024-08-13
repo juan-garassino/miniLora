@@ -95,27 +95,29 @@ def plot_lora_weights(model, title, output_dir):
     - title (str): Title for the plot
     - output_dir (str): Directory to save the plot
     """
-    plt.figure(figsize=(20, 15))
+    fig, axs = plt.subplots(2, 2, figsize=(20, 15))
+    fig.suptitle(title)
 
-    # Plot FC1 LoRA weights
-    plt.subplot(2, 2, 1)
-    sns.heatmap(model.fc1.lora_A.detach().cpu().numpy(), cmap='viridis')
-    plt.title('FC1 LoRA A')
+    def plot_lora_layer(layer, row):
+        if hasattr(layer, 'lora_A'):
+            axs[row, 0].imshow(layer.lora_A.detach().cpu().numpy(), cmap='viridis', aspect='auto')
+            axs[row, 0].set_title(f'FC{row+1} LoRA A')
+            axs[row, 1].imshow(layer.lora_B.detach().cpu().numpy(), cmap='viridis', aspect='auto')
+            axs[row, 1].set_title(f'FC{row+1} LoRA B')
+        elif hasattr(layer, 'lora_As'):
+            combined_A = torch.cat(layer.lora_As, dim=0).detach().cpu().numpy()
+            combined_B = torch.cat(layer.lora_Bs, dim=1).detach().cpu().numpy()
+            axs[row, 0].imshow(combined_A, cmap='viridis', aspect='auto')
+            axs[row, 0].set_title(f'FC{row+1} Combined LoRA As')
+            axs[row, 1].imshow(combined_B, cmap='viridis', aspect='auto')
+            axs[row, 1].set_title(f'FC{row+1} Combined LoRA Bs')
+        else:
+            axs[row, 0].text(0.5, 0.5, 'No LoRA weights', ha='center', va='center')
+            axs[row, 1].text(0.5, 0.5, 'No LoRA weights', ha='center', va='center')
 
-    plt.subplot(2, 2, 2)
-    sns.heatmap(model.fc1.lora_B.detach().cpu().numpy(), cmap='viridis')
-    plt.title('FC1 LoRA B')
+    plot_lora_layer(model.fc1, 0)
+    plot_lora_layer(model.fc2, 1)
 
-    # Plot FC2 LoRA weights
-    plt.subplot(2, 2, 3)
-    sns.heatmap(model.fc2.lora_A.detach().cpu().numpy(), cmap='viridis')
-    plt.title('FC2 LoRA A')
-
-    plt.subplot(2, 2, 4)
-    sns.heatmap(model.fc2.lora_B.detach().cpu().numpy(), cmap='viridis')
-    plt.title('FC2 LoRA B')
-
-    plt.suptitle(title)
     plt.tight_layout()
     plt.savefig(f"{output_dir}/{title.replace(' ', '_')}.png")
     plt.close()

@@ -14,6 +14,7 @@ from utils.visualization import (plot_learning_curves, plot_weight_heatmaps,
                                  plot_confusion_matrix, plot_grad_cam)
 from utils.analysis import hyperparameter_tuning, compare_models
 from utils.logger import logger
+from utils.quantization import quantize_model, analyze_quantization_results
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="miniLora: Low-Rank Adaptation experiment")
@@ -25,6 +26,7 @@ def parse_arguments():
     parser.add_argument('--output_dir', type=str, default=None, help="Output directory for results (default: timestamped folder)")
     parser.add_argument('--no_cuda', action='store_true', help="Disable CUDA even if available")
     parser.add_argument('--skip_hyperparameter_tuning', action='store_true', help="Skip hyperparameter tuning")
+    parser.add_argument('--skip_quantization', action='store_true', help="Skip model quantization")
     return parser.parse_args()
 
 def main(args):
@@ -134,6 +136,21 @@ def main(args):
     sample_image, _ = next(iter(fashion_test_loader))
     for model_name, model in all_models.items():
         plot_grad_cam(model, DEVICE, sample_image[0], target_class=5, title=f"{model_name} Grad-CAM", output_dir=OUTPUT_DIR)
+
+    # Quantization analysis
+    if not args.skip_quantization:
+        logger.info("Performing quantization analysis...")
+        quantization_results = {}
+        for model_name, model in all_models.items():
+            logger.info(f"Quantizing {model_name}...")
+            quant_results = quantize_model(model, DEVICE, fashion_test_loader)
+            quantization_results[model_name] = quant_results
+            
+            analysis = analyze_quantization_results(quant_results)
+            with open(f"{OUTPUT_DIR}/{model_name}_quantization_analysis.txt", "w") as f:
+                f.write(analysis)
+        
+        logger.info("Quantization analysis completed. Results saved in the output directory.")
 
     logger.info("miniLora experiment completed successfully!")
 
