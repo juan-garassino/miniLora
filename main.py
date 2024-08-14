@@ -134,8 +134,9 @@ def main(args):
 
     # Grad-CAM visualization for a sample image
     sample_image, _ = next(iter(fashion_test_loader))
+    sample_image = sample_image[0].to(DEVICE)  # Move the sample image to the correct device
     for model_name, model in all_models.items():
-        plot_grad_cam(model, DEVICE, sample_image[0], target_class=5, title=f"{model_name} Grad-CAM", output_dir=OUTPUT_DIR)
+        plot_grad_cam(model, DEVICE, sample_image, target_class=5, title=f"{model_name} Grad-CAM", output_dir=OUTPUT_DIR)
 
     # Quantization analysis
     if not args.skip_quantization:

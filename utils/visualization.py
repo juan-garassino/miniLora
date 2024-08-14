@@ -201,7 +201,7 @@ def plot_confusion_matrix(model, device, data_loader, class_names, title, output
     plt.close()
     logger.info(f"Confusion matrix saved as {output_dir}/{title.replace(' ', '_')}.png")
 
-def grad_cam(model, device, image, target_class, layer_name='conv2'):
+def grad_cam(model, device, image, target_class):
     """
     Generate a Grad-CAM heatmap for a given image and target class.
 
@@ -210,35 +210,89 @@ def grad_cam(model, device, image, target_class, layer_name='conv2'):
     - device (torch.device): The device to run the model on
     - image (torch.Tensor): Input image tensor
     - target_class (int): Target class for Grad-CAM
-    - layer_name (str): Name of the layer to use for Grad-CAM
 
     Returns:
     - numpy.ndarray: Grad-CAM heatmap
     """
     model.eval()
     image = image.unsqueeze(0).to(device)
-    image.requires_grad_()
+    
+    # Hook for the conv2 layer
+    conv_output = None
+    def hook_fn(module, input, output):
+        nonlocal conv_output
+        conv_output = output
 
-    # Get the output for the target class
-    output = model(image)
+    hook = model.conv2.register_forward_hook(hook_fn)
+
+    # Forward pass
     model.zero_grad()
-    class_output = output[0, target_class]
-    class_output.backward()
+    output = model(image)
+    
+    # Target for backprop
+    one_hot_output = torch.zeros_like(output)
+    one_hot_output[0][target_class] = 1
 
-    # Get the gradients and activations
-    gradients = getattr(model, layer_name).weight.grad.data.cpu().numpy()
-    activations = getattr(model, layer_name)(image).detach().cpu().numpy()
+    # Backward pass
+    output.backward(gradient=one_hot_output)
+
+    # Get gradients and activations
+    gradients = model.conv2.weight.grad.data.cpu().numpy()
+    activations = conv_output.detach().cpu().numpy()
+
+    # Remove the hook
+    hook.remove()
 
     # Calculate Grad-CAM
     weights = np.mean(gradients, axis=(2, 3))[0, :]
-    cam = np.sum(weights[:, np.newaxis, np.newaxis] * activations[0], axis=0)
-    cam = np.maximum(cam, 0)  # ReLU
-    cam = cv2.resize(cam, (28, 28))  # Resize to image size
-    cam = (cam - np.min(cam)) / (np.max(cam) - np.min(cam))  # Normalize
+    cam = np.zeros(activations.shape[2:], dtype=np.float32)
+
+    for i, w in enumerate(weights):
+        cam += w * activations[0, i, :, :]
+
+    cam = np.maximum(cam, 0)
+    cam = cv2.resize(cam, (28, 28))
+    cam = cam - np.min(cam)
+    cam = cam / np.max(cam)
 
     return cam
 
 def plot_grad_cam(model, device, image, target_class, title, output_dir):
+    """
+    Generate and plot Grad-CAM heatmap for a given image.
+
+    Args:
+    - model (nn.Module): The trained neural network model
+    - device (torch.device): The device to run the model on
+    - image (torch.Tensor): Input image tensor
+    - target_class (int): Target class for Grad-CAM
+    - title (str): Title for the plot
+    - output_dir (str): Directory to save the plot
+    """
+    cam = grad_cam(model, device, image, target_class)
+
+    plt.figure(figsize=(12, 4))
+    plt.subplot(1, 3, 1)
+    plt.imshow(image.squeeze().cpu().numpy(), cmap='gray')
+    plt.title('Original Image')
+    plt.axis('off')
+
+    plt.subplot(1, 3, 2)
+    plt.imshow(cam, cmap='jet')
+    plt.title('Grad-CAM Heatmap')
+    plt.axis('off')
+
+    plt.subplot(1, 3, 3)
+    plt.imshow(image.squeeze().cpu().numpy(), cmap='gray')
+    plt.imshow(cam, cmap='jet', alpha=0.5)
+    plt.title('Overlay')
+    plt.axis('off')
+
+    plt.suptitle(title)
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/{title.replace(' ', '_')}.png")
+    plt.close()
+    logger.info(f"Grad-CAM visualization saved as {output_dir}/{title.replace(' ', '_')}.png")
     """
     Generate and plot Grad-CAM heatmap for a given image.
 
