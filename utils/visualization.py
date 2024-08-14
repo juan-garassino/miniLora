@@ -105,8 +105,8 @@ def plot_lora_weights(model, title, output_dir):
             axs[row, 1].imshow(layer.lora_B.detach().cpu().numpy(), cmap='viridis', aspect='auto')
             axs[row, 1].set_title(f'FC{row+1} LoRA B')
         elif hasattr(layer, 'lora_As'):
-            combined_A = torch.cat(layer.lora_As, dim=0).detach().cpu().numpy()
-            combined_B = torch.cat(layer.lora_Bs, dim=1).detach().cpu().numpy()
+            combined_A = torch.cat([param.unsqueeze(0) for param in layer.lora_As], dim=0).detach().cpu().numpy()
+            combined_B = torch.cat([param.unsqueeze(1) for param in layer.lora_Bs], dim=1).detach().cpu().numpy()
             axs[row, 0].imshow(combined_A, cmap='viridis', aspect='auto')
             axs[row, 0].set_title(f'FC{row+1} Combined LoRA As')
             axs[row, 1].imshow(combined_B, cmap='viridis', aspect='auto')
