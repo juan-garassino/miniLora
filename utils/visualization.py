@@ -95,33 +95,32 @@ def plot_lora_weights(model, title, output_dir):
     - title (str): Title for the plot
     - output_dir (str): Directory to save the plot
     """
-    fig, axs = plt.subplots(2, 2, figsize=(20, 15))
-    fig.suptitle(title)
-
-    def plot_lora_layer(layer, row):
+    def plot_lora_layer(layer, layer_name):
         if hasattr(layer, 'lora_A'):
-            axs[row, 0].imshow(layer.lora_A.detach().cpu().numpy(), cmap='viridis', aspect='auto')
-            axs[row, 0].set_title(f'FC{row+1} LoRA A')
-            axs[row, 1].imshow(layer.lora_B.detach().cpu().numpy(), cmap='viridis', aspect='auto')
-            axs[row, 1].set_title(f'FC{row+1} LoRA B')
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+            sns.heatmap(layer.lora_A.detach().cpu().numpy(), ax=ax1, cmap='viridis')
+            ax1.set_title(f'{layer_name} LoRA A')
+            sns.heatmap(layer.lora_B.detach().cpu().numpy(), ax=ax2, cmap='viridis')
+            ax2.set_title(f'{layer_name} LoRA B')
         elif hasattr(layer, 'lora_As'):
-            combined_A = torch.cat([param.unsqueeze(0) for param in layer.lora_As], dim=0).detach().cpu().numpy()
-            combined_B = torch.cat([param.unsqueeze(1) for param in layer.lora_Bs], dim=1).detach().cpu().numpy()
-            axs[row, 0].imshow(combined_A, cmap='viridis', aspect='auto')
-            axs[row, 0].set_title(f'FC{row+1} Combined LoRA As')
-            axs[row, 1].imshow(combined_B, cmap='viridis', aspect='auto')
-            axs[row, 1].set_title(f'FC{row+1} Combined LoRA Bs')
+            num_ranks = len(layer.lora_As)
+            fig, axs = plt.subplots(2, num_ranks, figsize=(10*num_ranks, 20))
+            for i, (lora_A, lora_B) in enumerate(zip(layer.lora_As, layer.lora_Bs)):
+                sns.heatmap(lora_A.detach().cpu().numpy(), ax=axs[0, i], cmap='viridis')
+                axs[0, i].set_title(f'{layer_name} LoRA A (Rank {i+1})')
+                sns.heatmap(lora_B.detach().cpu().numpy(), ax=axs[1, i], cmap='viridis')
+                axs[1, i].set_title(f'{layer_name} LoRA B (Rank {i+1})')
         else:
-            axs[row, 0].text(0.5, 0.5, 'No LoRA weights', ha='center', va='center')
-            axs[row, 1].text(0.5, 0.5, 'No LoRA weights', ha='center', va='center')
+            fig, ax = plt.subplots(1, 1, figsize=(10, 10))
+            ax.text(0.5, 0.5, 'No LoRA weights', ha='center', va='center')
+            
+        plt.tight_layout()
+        plt.savefig(f"{output_dir}/{title}_{layer_name}.png")
+        plt.close()
+        logger.info(f"LoRA weights heatmap for {layer_name} saved as {output_dir}/{title}_{layer_name}.png")
 
-    plot_lora_layer(model.fc1, 0)
-    plot_lora_layer(model.fc2, 1)
-
-    plt.tight_layout()
-    plt.savefig(f"{output_dir}/{title.replace(' ', '_')}.png")
-    plt.close()
-    logger.info(f"LoRA weights heatmap saved as {output_dir}/{title.replace(' ', '_')}.png")
+    plot_lora_layer(model.fc1, 'FC1')
+    plot_lora_layer(model.fc2, 'FC2')
 
 def visualize_feature_space(model, device, data_loader, title, output_dir):
     """
